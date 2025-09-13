@@ -220,7 +220,6 @@ class ClassController extends Controller
              $classTeachers = ClassTeacherModel::where('id', $id)->first();
              $teachers = TeacherModel::where('status','ACT')->get();
              $subjects = SubjectModel::where('status','ACT')->get();
-             // If $id refers to the class_teachers.id, use this approach
              $class_id = $classTeachers->class_id;
              $classes = ClassModel::find($class_id);
              $classViews = ClassViewModel::where('id', $class_id)->get();
