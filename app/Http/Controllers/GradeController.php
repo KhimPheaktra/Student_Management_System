@@ -34,7 +34,7 @@ protected function get(Request $request)
     $generations = GenerationModel::all();
     $majors = MajorModel::all();
  
-    $students = collect(); // Empty collection by default
+    $students = collect(); 
     $studentGrades = collect();
  
     // Only query students if both term and generation are selected
@@ -274,7 +274,7 @@ protected function get(Request $request)
 
          try{
 
-             $termId = request('term_id'); // get term ID from query string
+             $termId = request('term_id'); 
              if (!$termId) {
                  return redirect()->back()->with('error', 'Term ID is required.');
              }
@@ -282,7 +282,7 @@ protected function get(Request $request)
              $selectedStudent = StudentModel::findOrFail($id);
              $selectedGeneration = GenerationModel::findOrFail($selectedStudent->gen_id);
              $selectedMajor = MajorModel::findOrFail($selectedStudent->major_id);
-             $generations = GenerationModel::all(); // You might not need this anymore
+             $generations = GenerationModel::all(); 
              $terms = TermModel::all();
              $students = StudentModel::where('gen_id', $selectedStudent->gen_id)
                                      ->where('major_id', $selectedStudent->major_id)
