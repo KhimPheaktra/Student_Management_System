@@ -136,7 +136,7 @@ Route::delete('/employee/delete/{id}',[EmployeeController::class,'delete'])->nam
 
 //Position 
 Route::get('/position',[PositionController::class , 'get'])->name('position');
-Route::get('/position/add',[PositionController::class , 'add'])->middleware('role:superAdmin')->name('position.add');
+Route::get('/position/add',[PositionController::class , 'add'])->middleware('role:SuperAdmin,Admin')->name('position.add');
 Route::post('/position/create',[PositionController::class, 'create'])->name('position.create');
 Route::get('/position/edit/{id}',[PositionController::class,'find'])->name('position.edit');
 Route::put('/position/update/{id}',[PositionController::class,'update'])->name('position.update');

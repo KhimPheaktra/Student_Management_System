@@ -16,6 +16,6 @@ class EmployeeModel extends Model
     public function position_id(){
         return $this->belongsTo(PositionModel::class , 'postion_id');
     }
- 
+
 
 }

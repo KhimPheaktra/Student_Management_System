@@ -15,9 +15,22 @@
         <div class="card-body">
             <form method="POST" action="{{ route('user.create') }}">
                 @csrf
+           <div class="input-group"> 
+                <input type="text" id="name" name="name" class="form-control" 
+                    placeholder="Enter or select user name" required> 
 
+                <select id="employeeSelect" class="form-select" style="max-width: 200px;"> 
+                    <option value="">Select Employee</option> 
+                    @foreach($employees as $employee) 
+                        <option value="{{ $employee->first_name . ' ' . $employee->last_name }}"> 
+                            {{ $employee->first_name . ' ' . $employee->last_name }} 
+                        </option> 
+                    @endforeach 
+                </select> 
+            </div>
                  <!-- Name -->
-                <div class="mb-3">
+                
+                {{-- <div class="mb-3">
                     <label for="name" class="form-label">User Name</label>
                     <select class="form-select" name="name" required>
                         <option value="" disabled selected>Select User</option>
@@ -30,12 +43,12 @@
                     @error('name')
                         <div class="text-danger mt-1">{{ $message }}</div>
                     @enderror
-                </div>
+                </div> --}}
 
                  <!-- Role -->
                  <div class="mb-3">
                     <label for="name" class="form-label">Role</label>
-                    <select class="form-select" name="name" required>
+                    <select class="form-select" name="role_id" required>
                         <option value="" disabled selected>Select Role</option>
                         @foreach($roles as $role)
                             <option value="{{ $role->id}}">
@@ -77,5 +90,14 @@
         </div>
     </div>
 
+    
+<script>
+document.getElementById('employeeSelect').addEventListener('change', function() {
+    document.getElementById('name').value = this.value;
+});
+</script>
 
 @endsection
+
+
+

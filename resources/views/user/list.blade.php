@@ -28,10 +28,16 @@
     </div>
   </div>
 
+  @role('Admin', 'SuperAdmin')
   <div class="col-md-2">
+      <a href="{{ url('/user/add') }}" type="button" class="btn btn-primary mb-2">Add New</a>
+  </div>
+  @endrole
+
+  {{-- <div class="col-md-2">
     <a href="{{url('/user/add')}}" type="button" class="btn btn-primary mb-2">Add New</a>
     </div>
-</div>
+</div> --}}
 
 
 <div class="table-container">
@@ -69,13 +75,20 @@
         @forelse($users as $user)
         <tr>
             <th scope="row">{{$user->id}}</th>
-            <td>{{$user->name}}</td>
+            {{-- <td>{{$user->name}}</td> --}}
+          <td>
+              {{ $user->employee_id && $user->employee
+                  ? $user->employee->first_name . ' ' . $user->employee->last_name
+                  : $user->name
+              }}
+          </td>
             <td>{{$user->email}}</td>
             <td>@php 
               $role = App\Models\RoleModel::find($user->role_id);
               echo $role ? $role->name : '';
-          @endphp
+            @endphp
           </td>
+
             <td>
                 @if ($user->status == 'ACT')
                   <span class="badge text-bg-success">Active</span>                  

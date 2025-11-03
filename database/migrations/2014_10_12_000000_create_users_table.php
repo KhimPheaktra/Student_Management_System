@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name'); 
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('status')->default('ACT');
             $table->rememberToken();
             $table->timestamps();
-            $table->foreignId('role_id')->nullable()  // Add the role_id column
+            $table->foreignId('role_id')->nullable()  
             ->constrained('roles')  // Foreign key to the roles table
             ->onDelete('restrict');
         });

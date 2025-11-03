@@ -85,6 +85,7 @@ class UserController extends Controller
                'name' => $request->name,
                'email' => $request->email,
                'password' => Hash::make($request->password),
+               'role_id' => $request->role_id,
            ]);
    
            Alert::success('User Added Successfully');
@@ -125,10 +126,12 @@ class UserController extends Controller
               Rule::unique('users')->ignore($users->id), // Ignore the current user's email
           ],
           'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
+          
       ]);
     
       $users->name = $request->name;
       $users->email = $request->email;
+      $users->role_id = $request->role_id;
     
       if ($request->filled('password')) {
           $users->password = Hash::make($request->password);

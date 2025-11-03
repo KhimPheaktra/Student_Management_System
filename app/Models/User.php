@@ -56,6 +56,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(RoleModel::class, 'role_id');
     }   
+    public function employee() {
+        return $this->belongsTo(EmployeeModel::class, 'employee_id');
+    }
+
     
     /**
      * Check if the user has a specific role.

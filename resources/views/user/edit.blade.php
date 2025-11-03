@@ -16,8 +16,30 @@
             <form method="POST" action="{{ route('user.update', $users->id) }}">
                 @csrf   
                 @method('PUT')
+                <div class="input-group">  
+                    <!-- Text input for name (pre-filled with current user name) -->  
+                    <input type="text" id="name" name="name" class="form-control" 
+                        placeholder="Enter or select user name" value="{{ old('name', $users->name) }}" required>  
+
+                    <!-- Employee select dropdown -->  
+                    <select id="employeeSelect" class="form-select" style="max-width: 200px;">  
+                        <option value="">Select Employee</option>  
+                        @foreach($employees as $employee)  
+                            @php
+                                $fullName = $employee->first_name . ' ' . $employee->last_name;
+                            @endphp
+                            <option value="{{ $fullName }}" {{ $fullName === $users->name ? 'selected' : '' }}>  
+                                {{ $fullName }}  
+                            </option>  
+                        @endforeach  
+                    </select>  
+                </div>  
+
+                @error('name')  
+                    <div class="text-danger mt-1">{{ $message }}</div>  
+                @enderror  
                 <!-- Employee (User Name) -->
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <label for="name" class="form-label">User Name</label>
                     <select class="form-select" name="name" required>
                         <option value="" disabled>Select User</option>
@@ -33,7 +55,7 @@
                     @error('name')
                         <div class="text-danger mt-1">{{ $message }}</div>
                     @enderror
-                </div>
+                </div> --}}
 
                 <!-- Role -->
                 <div class="mb-3">
@@ -86,5 +108,10 @@
         </div>
     </div>
 
-
+  
+<script>
+document.getElementById('employeeSelect').addEventListener('change', function() {
+    document.getElementById('name').value = this.value;
+});
+</script>
 @endsection
